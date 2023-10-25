@@ -35,8 +35,8 @@ public class SurveyTextFileHandler {
                 writer.newLine();
                 writer.write("Options: " + String.join(",", question.getOptions()));
                 writer.newLine();
-                writer.write("Correct Answer: " + question.getCorrectAnswerIndex());
-                writer.newLine();
+//                writer.write("Correct Answer: " + question.getCorrectAnswerIndex());
+//                writer.newLine();
             }
             writer.write("------------------------------");
             writer.newLine();
@@ -72,16 +72,14 @@ public class SurveyTextFileHandler {
                             } else if (line.startsWith("Question: ")) {
                                 String questionText = line.substring(10);
                                 List<String> options = new ArrayList<>();
-                                int correctAnswerIndex = 0;
+//                                int correctAnswerIndex = 0;
                                 while ((line = reader.readLine()) != null && !line.startsWith("Options: ")) {
                                     if (line.startsWith("Options: ")) {
                                         String[] optionsArray = line.substring(9).split(",");
                                         options.addAll(List.of(optionsArray));
-                                    } else if (line.startsWith("Correct Answer: ")) {
-                                        correctAnswerIndex = Integer.parseInt(line.substring(16));
                                     }
                                 }
-                                Question question = new Question(questionText, options, correctAnswerIndex);
+                                Question question = new Question(questionText, options);
                                 assert currentSurvey != null;
                                 currentSurvey.addQuestion(question);
                             }

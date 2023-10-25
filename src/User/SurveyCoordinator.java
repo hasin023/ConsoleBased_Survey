@@ -45,7 +45,7 @@ public class SurveyCoordinator extends User {
             }
 
             List<String> options = new ArrayList<>();
-            int correctAnswerIndex = 0;
+//            int correctAnswerIndex = 0;
 
             while (true) {
                 System.out.println("Enter an option for the question (Enter 'q' to finish adding options):");
@@ -56,14 +56,14 @@ public class SurveyCoordinator extends User {
 
                 options.add(option);
 
-                System.out.println("Is this the correct answer for the question (true/false)?");
-                boolean isCorrect = Boolean.parseBoolean(scanner.nextLine());
-                if (isCorrect) {
-                    correctAnswerIndex = options.size() - 1;
-                }
+//                System.out.println("Is this the correct answer for the question (true/false)?");
+//                boolean isCorrect = Boolean.parseBoolean(scanner.nextLine());
+//                if (isCorrect) {
+//                    correctAnswerIndex = options.size() - 1;
+//                }
             }
 
-            Question question = new Question(questionText, options, correctAnswerIndex);
+            Question question = new Question(questionText, options);
             survey.addQuestion(question);
         }
         surveyTextFileHandler.saveSurvey(survey, createdBy);
