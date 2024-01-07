@@ -2,10 +2,10 @@ package TextFileHelper;
 
 import Response.UserResponse;
 
-import java.io.*;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 
 public class SurveyResponseTextFileHandler {
     private final String responsesDirectory;
@@ -32,38 +32,5 @@ public class SurveyResponseTextFileHandler {
             System.out.println("Error saving survey response.");
         }
     }
-
-    public List<UserResponse> loadResponsesForSurvey(int surveyId) {
-        List<UserResponse> responses = new ArrayList<>();
-        String filename = responsesDirectory + File.separator + "Survey_" + surveyId + "_Responses.txt";
-
-        try (BufferedReader reader = new BufferedReader(new FileReader(filename))) {
-            UserResponse currentResponse = null;
-            String line;
-
-            while ((line = reader.readLine()) != null) {
-                if (line.startsWith("Respondent: ")) {
-                    if (currentResponse != null) {
-                        responses.add(currentResponse);
-                    }
-                    String respondentUsername = line.substring(12);
-                    currentResponse = new UserResponse(respondentUsername, surveyId, new ArrayList<>());
-                } else if (line.startsWith("Responses: ")) {
-                    if (currentResponse != null) {
-                        String[] responsesArray = line.substring(11).split(",");
-                        List<String> userResponses = Arrays.asList(responsesArray);
-                        currentResponse.getResponses().addAll(userResponses);
-                    }
-                }
-            }
-
-            if (currentResponse != null) {
-                responses.add(currentResponse);
-            }
-        } catch (IOException e) {
-            System.out.println("Error loading survey responses for Survey ID: " + surveyId);
-        }
-
-        return responses;
-    }
+    
 }
