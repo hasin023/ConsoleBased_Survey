@@ -2,11 +2,11 @@ package Report;
 
 import java.util.Map;
 
-public class SurveyReport {
+public class SurveyReportGenerator {
     private String respondentUsername;
     private Map<Integer, String> responses;
 
-    public SurveyReport(String respondentUsername, Map<Integer, String> responses) {
+    public SurveyReportGenerator(String respondentUsername, Map<Integer, String> responses) {
         this.respondentUsername = respondentUsername;
         this.responses = responses;
     }

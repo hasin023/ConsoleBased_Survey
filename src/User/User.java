@@ -1,5 +1,9 @@
 package User;
 
+import Report.SurveyReportGenerator;
+
+import java.util.Scanner;
+
 public abstract class User {
     private final String username;
     private final String password;
@@ -27,4 +31,18 @@ public abstract class User {
     }
 
     public abstract void showUserProfile();
+
+    public void viewSurveyReports() {
+        SurveyReportGenerator surveyReportGenerator = new SurveyReportGenerator();
+        surveyReportGenerator.generateSurveyReports("SurveyResponses", "SurveyReports");
+
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("Enter the ID of the survey you want to view the report for:");
+        int surveyId = scanner.nextInt();
+        String reportFileName = "Survey_ID_" + surveyId + "_Report.txt";
+        String reportFile = "SurveyReports/" + reportFileName;
+
+        surveyReportGenerator.viewSurveyReport(reportFile);
+    }
 }
