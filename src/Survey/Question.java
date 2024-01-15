@@ -1,16 +1,21 @@
 package Survey;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Question {
-    private final String text;
-    private final List<String> options;
-//    private final int correctAnswerIndex;
+    private final int id;
+    private String text;
+    private List<String> options;
 
-    public Question(String text, List<String> options) {
+    public Question(int id, String text, List<String> options) {
+        this.id = id;
         this.text = text;
         this.options = options;
-//        this.correctAnswerIndex = correctAnswerIndex;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public String getText() {
@@ -21,11 +26,11 @@ public class Question {
         return options;
     }
 
-//    public int getCorrectAnswerIndex() {
-//        return correctAnswerIndex;
-//    }
+    public void setOptions(List<String> options) {
+        this.options = new ArrayList<>(options);
+    }
 
-    public String getQuestion() {
-        return text;
+    public void setText(String questionText) {
+        this.text = questionText;
     }
 }
