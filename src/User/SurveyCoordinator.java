@@ -26,87 +26,65 @@ public class SurveyCoordinator extends User {
     }
 
 
-    public Survey createSurvey(Scanner scanner) {
-        String createdBy = getUsername();
-        System.out.println("Enter the title of the survey:");
-        String title = scanner.nextLine();
+    public Survey createSurvey(Scanner scanner) { }
 
-        System.out.println("Is the survey open (true/false)?");
-        boolean isOpen = Boolean.parseBoolean(scanner.nextLine());
+    private int getLastSurveyIdFromTextFile() {
+        List<Survey> allSurveys = surveyTextFileHandler.loadSurveysFromAllUsers();
 
-        Survey survey = new Survey(title, createdBy);
-        survey.setOpen(isOpen);
-
-        while (true) {
-            System.out.println("Add a question to the survey (Enter 'q' to finish adding questions):");
-            String questionText = scanner.nextLine();
-            if (questionText.equalsIgnoreCase("q")) {
-                break;
-            }
-
-            List<String> options = new ArrayList<>();
-//            int correctAnswerIndex = 0;
-
-            while (true) {
-                System.out.println("Enter an option for the question (Enter 'q' to finish adding options):");
-                String option = scanner.nextLine();
-                if (option.equalsIgnoreCase("q")) {
-                    break;
-                }
-
-                options.add(option);
-
-//                System.out.println("Is this the correct answer for the question (true/false)?");
-//                boolean isCorrect = Boolean.parseBoolean(scanner.nextLine());
-//                if (isCorrect) {
-//                    correctAnswerIndex = options.size() - 1;
-//                }
-            }
-
-            Question question = new Question(questionText, options);
-            survey.addQuestion(question);
+        if (allSurveys.isEmpty()) {
+            return 0;
+        } else {
+            return allSurveys.getLast().getId();
         }
-        surveyTextFileHandler.saveSurvey(survey, createdBy);
-        surveys.add(survey);
-        System.out.println("-------------------------------------");
-        System.out.println("Survey created successfully.");
-        System.out.println("-------------------------------------");
-        return survey;
     }
 
 
     public void printAllSurveyTitles() {
-        surveys = surveyTextFileHandler.loadSurveys(getUsername());
+        surveys = surveyTextFileHandler.loadUserSpecificSurveys(getUsername());
 
         if (surveys.isEmpty()) {
             System.out.println("No surveys found for user: " + getUsername());
             System.out.println("-------------------------------------");
         } else {
-            int surveyCount = 0;
+            System.out.println("Surveys for user " + getUsername() + " =>");
+
             for (Survey survey : surveys) {
-                System.out.println("Survey Title: " + survey.getTitle());
-                surveyCount++;
+                System.out.println("(ID: " + survey.getId() + ")" + " Survey Title: " + survey.getTitle() + " (Open: " + survey.isOpen() + ")");
             }
-            System.out.println("Total Surveys for user " + getUsername() + ": " + surveyCount);
+            System.out.println("Available Surveys: " + surveys.size());
             System.out.println("-------------------------------------");
         }
     }
 
 
-    public void editSurvey(Survey survey, String newTitle) {
-        if (survey.isOpen()) {
-            survey.setTitle(newTitle);
+    public void openCloseSurvey() {
+        printAllSurveyTitles();
+
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter the ID of the survey you want to open/close:");
+        int surveyId = scanner.nextInt();
+        String currentUser = getUsername();
+        Survey survey = getSurveyByIdAndUser(surveyId, currentUser);
+
+        if (survey != null) {
+            if (survey.isOpen()) {
+                closeSurvey(survey);
+                System.out.println("Survey closed successfully.");
+                System.out.println("-------------------------------------");
+            } else {
+                openSurvey(survey);
+                System.out.println("Survey opened successfully.");
+                System.out.println("-------------------------------------");
+            }
         } else {
-            System.out.println("Cannot edit a closed survey.");
+            System.out.println("Survey not found or you don't have permission to modify it.");
+            System.out.println("-------------------------------------");
         }
     }
 
-    public void deleteSurvey(Survey survey) {
-        if (survey.isOpen()) {
-            surveys.remove(survey);
-        } else {
-            System.out.println("Cannot delete a closed survey.");
-        }
+    private void openSurvey(Survey survey) {
+        survey.setOpen(true);
+        surveyTextFileHandler.saveSurvey(survey, survey.getCreatedBy());
     }
 
     public void closeSurvey(Survey survey) {
@@ -114,13 +92,15 @@ public class SurveyCoordinator extends User {
         surveyTextFileHandler.saveSurvey(survey, survey.getCreatedBy());
     }
 
-    public List<Survey> getOpenSurveys() {
-        List<Survey> openSurveys = new ArrayList<>();
+    private Survey getSurveyByIdAndUser(int surveyId, String currentUser) {
+        List<Survey> surveys = surveyTextFileHandler.loadUserSpecificSurveys(currentUser);
         for (Survey survey : surveys) {
-            if (survey.isOpen()) {
-                openSurveys.add(survey);
+            if (survey.getId() == surveyId) {
+                return survey;
             }
         }
-        return openSurveys;
+        return null;
     }
+
+
 }

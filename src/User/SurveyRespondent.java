@@ -1,4 +1,3 @@
-// SurveyRespondent.java
 package User;
 
 import Response.UserResponse;
