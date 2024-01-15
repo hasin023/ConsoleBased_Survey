@@ -1,7 +1,6 @@
 package User;
 
 import Survey.Survey;
-import TextFileHelper.ReportTextFileHandler;
 
 import java.util.HashSet;
 import java.util.Set;
