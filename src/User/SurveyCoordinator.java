@@ -1,5 +1,6 @@
 package User;
 
+import Report.SurveyReportGenerator;
 import Survey.Question;
 import Survey.Survey;
 import TextFileHelper.SurveyTextFileHandler;
@@ -158,7 +159,34 @@ public class SurveyCoordinator extends User {
             System.out.println("-------------------------------------");
         }
     }
-    
+
+
+    @Override
+    public void viewSurveyReports() {
+        SurveyReportGenerator surveyReportGenerator = new SurveyReportGenerator();
+        surveyReportGenerator.generateSurveyReports("SurveyResponses", "SurveyReports");
+
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("Enter the ID of the survey report ->");
+        int surveyId = scanner.nextInt();
+        String reportFileName = "Survey_ID_" + surveyId + "_Report.txt";
+        String reportFile = "SurveyReports/" + reportFileName;
+
+        List<Survey> surveys = surveyTextFileHandler.loadUserSpecificSurveys(getUsername());
+
+        for (Survey survey : surveys) {
+            if (survey.getId() == surveyId) {
+                surveyReportGenerator.viewSurveyReport(reportFile);
+                return;
+            } else {
+                System.out.println("Can not view survey report from another user.");
+                System.out.println("-------------------------------------");
+                break;
+            }
+        }
+
+    }
 
 
 }
