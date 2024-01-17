@@ -1,6 +1,6 @@
-# SnapFeedback - A Survey Management
+# SurveyFeedback - A Survey Management
 
-SnapFeedback is a survey management system. A simple survey management console based system that handles both Admin and User side responsibilites. Coordinate users can Create, Edit, Open/Close surveys.Whereas, Respondent users can take surveys and view survey reports. The application is developed as a group project for the course SWE 4304 - Software Project Lab at Islamic University of Technology.
+SurveyFeedback is a survey management system. A simple survey management console based system that handles both Admin and User side responsibilites. Coordinate users can Create, Edit, Open/Close surveys.Whereas, Respondent users can take surveys and view survey reports. The application is developed as a group project for the course SWE 4304 - Software Project Lab at Islamic University of Technology.
 
 ## Project Layout
 

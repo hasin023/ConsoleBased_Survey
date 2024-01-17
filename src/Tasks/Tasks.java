@@ -53,6 +53,26 @@ public class Tasks {
         System.out.println("Enter choice:");
     }
 
+    public User registerTask(Scanner scanner, UserAccountManager userAccountManager, UserFactory userFactory) {
+        System.out.println("Enter username:");
+        String username = scanner.next();
+        System.out.println("Enter password:");
+        String password = scanner.next();
+
+        User loggedInUser = userAccountManager.registerUser(userFactory.createUser(username, password));
+
+        if (loggedInUser != null) {
+            loggedInUser.setLoggedIn(true);
+            System.out.println("Registration successful, WELCOME " + loggedInUser.getUsername() + "!");
+            System.out.println("-------------------------------------");
+        } else {
+            System.out.println("Registration failed.");
+            System.out.println("-------------------------------------");
+        }
+
+        return loggedInUser;
+    }
+
     public User loginTask(Scanner scanner, UserAccountManager userAccountManager) {
         System.out.println("Enter username:");
         String username = scanner.next();
@@ -68,27 +88,6 @@ public class Tasks {
 
         } else {
             System.out.println("Login failed.");
-            System.out.println("-------------------------------------");
-        }
-
-        return loggedInUser;
-    }
-
-
-    public User registerTask(Scanner scanner, UserAccountManager userAccountManager, UserFactory userFactory) {
-        System.out.println("Enter username:");
-        String username = scanner.next();
-        System.out.println("Enter password:");
-        String password = scanner.next();
-
-        User loggedInUser = userAccountManager.registerUser(userFactory.createUser(username, password));
-
-        if (loggedInUser != null) {
-            loggedInUser.setLoggedIn(true);
-            System.out.println("Registration successful, WELCOME " + loggedInUser.getUsername() + "!");
-            System.out.println("-------------------------------------");
-        } else {
-            System.out.println("Registration failed.");
             System.out.println("-------------------------------------");
         }
 
