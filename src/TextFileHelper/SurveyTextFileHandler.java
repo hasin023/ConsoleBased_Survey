@@ -46,6 +46,26 @@ public class SurveyTextFileHandler {
     }
 
 
+    private void writeSurveyToFile(BufferedWriter writer, Survey survey, String createdBy) throws IOException {
+        writer.write("ID: " + survey.getId() + "-" + createdBy);
+        writer.newLine();
+        writer.write("Title: " + survey.getTitle());
+        writer.newLine();
+        writer.write("Open: " + survey.isOpen());
+        writer.newLine();
+
+        for (Question question : survey.getQuestions()) {
+            writer.write("Question-" + question.getId() + ": " + question.getText());
+            writer.newLine();
+            writer.write("Options: " + String.join(",", question.getOptions()));
+            writer.newLine();
+        }
+
+        writer.write("------------------------------");
+        writer.newLine();
+    }
+
+
     public List<Survey> loadSurveys(String createdBy) {
         List<Survey> loadedSurveys = new ArrayList<>();
         File surveysDirectory = new File(this.surveysDirectory);
@@ -94,6 +114,28 @@ public class SurveyTextFileHandler {
             }
         }
         return loadedSurveys;
+    }
+
+
+    public void deleteSurvey(Survey survey, String createdBy) {
+        String filename = surveysDirectory + File.separator + "All_Surveys.txt";
+
+        List<Survey> existingSurveys = loadSurveysFromAllUsers();
+
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filename))) {
+            for (Survey existingSurvey : existingSurveys) {
+                if (existingSurvey.getId() == survey.getId() && existingSurvey.getCreatedBy().equals(createdBy)) {
+                    continue;
+                }
+                if(existingSurvey.getCreatedBy().equals(createdBy)){
+                    writeSurveyToFile(writer, existingSurvey, createdBy);
+                } else {
+                    writeSurveyToFile(writer, existingSurvey, existingSurvey.getCreatedBy());
+                }
+            }
+        } catch (IOException e) {
+            System.out.println("Error deleting survey.");
+        }
     }
 
 
