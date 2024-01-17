@@ -1,10 +1,11 @@
 package Response;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class UserResponse {
-    private String respondentUsername;
-    private int surveyId;
+    private final String respondentUsername;
+    private final int surveyId;
     private List<String> responses;
 
     public UserResponse(String respondentUsername, int surveyId, List<String> responses) {
@@ -32,5 +33,13 @@ public class UserResponse {
             System.out.println("Error parsing user id from username.");
             return -1;
         }
+    }
+
+    public List<Integer> getQuestionIds() {
+        List<Integer> questionIds = new ArrayList<>();
+        for (int i = 1; i <= responses.size(); i++) {
+            questionIds.add(i);
+        }
+        return questionIds;
     }
 }
