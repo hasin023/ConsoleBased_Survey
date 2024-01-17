@@ -26,7 +26,38 @@ public class SurveyCoordinator extends User {
     }
 
 
-    public Survey createSurvey(Scanner scanner) { }
+    public Survey createSurvey() {
+        Scanner scanner = new Scanner(System.in);
+
+        int id = getLastSurveyIdFromTextFile() + 1;
+        String createdBy = getUsername();
+
+        System.out.println("Enter the title of the survey ->");
+        String title = scanner.nextLine();
+
+        Survey survey = new Survey(id, title, createdBy);
+        survey.setOpen(false);
+
+        while (true) {
+            survey.addQuestion();
+
+            System.out.println("Do you want to add another question? (y/n):");
+            String addAnother = scanner.nextLine().trim().toLowerCase();
+
+            if (!"y".equals(addAnother)) {
+                break;
+            }
+        }
+
+        surveyTextFileHandler.saveSurvey(survey, createdBy);
+        surveys.add(survey);
+
+        System.out.println("-------------------------------------");
+        System.out.println("Survey created successfully.");
+        System.out.println("-------------------------------------");
+
+        return survey;
+    }
 
     private int getLastSurveyIdFromTextFile() {
         List<Survey> allSurveys = surveyTextFileHandler.loadSurveysFromAllUsers();
@@ -101,6 +132,33 @@ public class SurveyCoordinator extends User {
         }
         return null;
     }
+
+    private Survey getSurveyById(int surveyId) {
+        for (Survey survey : surveys) {
+            if (survey.getId() == surveyId) {
+                return survey;
+            }
+        }
+        return null;
+    }
+
+    public void deleteSurvey() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter the ID of the survey you want to delete:");
+        int surveyId = scanner.nextInt();
+        Survey survey = getSurveyById(surveyId);
+
+        if (survey != null) {
+            surveys.remove(survey);
+            surveyTextFileHandler.deleteSurvey(survey, survey.getCreatedBy());
+            System.out.println("Survey deleted successfully.");
+            System.out.println("-------------------------------------");
+        } else {
+            System.out.println("Survey not found.");
+            System.out.println("-------------------------------------");
+        }
+    }
+    
 
 
 }
