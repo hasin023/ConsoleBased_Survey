@@ -31,7 +31,7 @@ public class SurveyResponseTextFileHandler {
             Map<Integer, String> questionIdToResponseMap = new HashMap<>();
 
             for (int i = 0; i < questionIds.size(); i++) {
-                int questionId = questionIds.get(i) + 1;
+                int questionId = questionIds.get(i);
                 String responseText = (i < responses.size()) ? responses.get(i) : "Skipped";
                 questionIdToResponseMap.put(questionId, responseText);
             }

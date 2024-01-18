@@ -1,8 +1,0 @@
-Created By: hasin
-Title: ttl1
-Open: true
-Question: ques1
-Options: op1,op2,op3
-Question: ques2
-Options: op1,op2,op4
-------------------------------
