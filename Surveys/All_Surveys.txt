@@ -57,22 +57,13 @@ Question-2: new text
 Options: op1,op2
 ------------------------------
 ID: 8-hasin
-Title: ok
+Title: Test Survey
 Open: true
-Question-1: ok
-Options: op1,op2
-------------------------------
-ID: 9-hasin
-Title: okww
-Open: false
-Question-1: wasawsas
-Options: op1,op2,op3
-Question-2: swsaws
-Options: op3,op4
-------------------------------
-ID: 10-co1
-Title: S1
-Open: false
-Question-1: q1
-Options: 1,2,3
-------------------------------
+Question-1: What is your fav color?
+Options: Red,Blue,Yellow,Pink
+Question-2: What is your fav food?
+Options: Peach,Beans,Lime,Orange
+Question-3: What is your fav sport?
+Options: Badminton,Cricket,Football,Hockey
+Question-4: What is your fav place?
+Options: Sea,Hills,Beach,City
