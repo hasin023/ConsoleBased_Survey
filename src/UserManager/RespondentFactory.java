@@ -1,7 +1,7 @@
 package UserManager;
 
-import User.User;
 import User.SurveyRespondent;
+import User.User;
 
 public class RespondentFactory extends UserFactory{
     @Override

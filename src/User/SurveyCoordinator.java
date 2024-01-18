@@ -1,6 +1,5 @@
 package User;
 
-import Report.SurveyReportGenerator;
 import Survey.Question;
 import Survey.Survey;
 import TextFileHelper.SurveyTextFileHandler;
@@ -8,6 +7,8 @@ import TextFileHelper.SurveyTextFileHandler;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+
+import Report.SurveyReportGenerator;
 
 public class SurveyCoordinator extends User {
     private List<Survey> surveys;
@@ -26,7 +27,6 @@ public class SurveyCoordinator extends User {
         System.out.println("-------------------------------------");
     }
 
-
     public Survey createSurvey() {
         Scanner scanner = new Scanner(System.in);
 
@@ -42,7 +42,7 @@ public class SurveyCoordinator extends User {
         while (true) {
             survey.addQuestion();
 
-            System.out.println("Do you want to add another question? (y/n):");
+            System.out.println("Do you want to add another question? (y/n) ->");
             String addAnother = scanner.nextLine().trim().toLowerCase();
 
             if (!"y".equals(addAnother)) {
@@ -58,6 +58,7 @@ public class SurveyCoordinator extends User {
         System.out.println("-------------------------------------");
 
         return survey;
+
     }
 
     private int getLastSurveyIdFromTextFile() {
@@ -70,7 +71,6 @@ public class SurveyCoordinator extends User {
         }
     }
 
-
     public void printAllSurveyTitles() {
         surveys = surveyTextFileHandler.loadUserSpecificSurveys(getUsername());
 
@@ -81,13 +81,94 @@ public class SurveyCoordinator extends User {
             System.out.println("Surveys for user " + getUsername() + " =>");
 
             for (Survey survey : surveys) {
-                System.out.println("(ID: " + survey.getId() + ")" + " Survey Title: " + survey.getTitle() + " (Open: " + survey.isOpen() + ")");
+                System.out.println("(ID: " + survey.getId() + ")" + " Survey Title: " + survey.getTitle() + " (Status: "
+                        + survey.getStatus() + ")");
             }
             System.out.println("Available Surveys: " + surveys.size());
             System.out.println("-------------------------------------");
         }
     }
 
+    public void chooseSurvey() {
+        printAllSurveyTitles();
+
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter the ID of the survey you want to choose:");
+        int surveyId = scanner.nextInt();
+        Survey survey = getSurveyById(surveyId);
+        if (survey != null) {
+            System.out.println("Survey chosen successfully.");
+            System.out.println("-------------------------------------");
+            handleSurveyOperations(survey, scanner);
+        } else {
+            System.out.println("Survey not found.");
+            System.out.println("-------------------------------------");
+        }
+    }
+
+    private Survey getSurveyById(int surveyId) {
+        for (Survey survey : surveys) {
+            if (survey.getId() == surveyId) {
+                return survey;
+            }
+        }
+        return null;
+    }
+
+    private void showSurveyOperations() {
+        System.out.println("######################################");
+        System.out.println("1. View survey");
+        System.out.println("2. Edit Title");
+        System.out.println("3. Add question");
+        System.out.println("4. Edit question");
+        System.out.println("5. Delete question");
+        System.out.println("6. Save survey");
+        System.out.println("7. Exit survey");
+        System.out.println("######################################");
+        System.out.println("Enter your option choice:");
+    }
+
+    private void handleSurveyOperations(Survey survey, Scanner scanner) {
+        boolean editSurvey = true;
+        if (survey.isOpen()) {
+            System.out.println("Cannot perform operations on an open survey.");
+            System.out.println("-------------------------------------");
+            return;
+        }
+
+        while (!survey.isOpen() && editSurvey) {
+            showSurveyOperations();
+            int optionChoice = scanner.nextInt();
+
+            switch (optionChoice) {
+                case 1:
+                    survey.printSurveyDetails();
+                    break;
+                case 2:
+                    survey.editTitle();
+                    break;
+                case 3:
+                    survey.addQuestion();
+                    break;
+                case 4:
+                    survey.editQuestion();
+                    break;
+                case 5:
+                    survey.deleteQuestion(scanner);
+                    break;
+                case 6:
+                    surveyTextFileHandler.saveSurvey(survey, survey.getCreatedBy());
+                    break;
+                case 7:
+                    editSurvey = false;
+                    break;
+                default:
+                    System.out.println("Invalid option choice.");
+                    System.out.println("-------------------------------------");
+                    break;
+            }
+        }
+    }
 
     public void openCloseSurvey() {
         printAllSurveyTitles();
@@ -134,15 +215,6 @@ public class SurveyCoordinator extends User {
         return null;
     }
 
-    private Survey getSurveyById(int surveyId) {
-        for (Survey survey : surveys) {
-            if (survey.getId() == surveyId) {
-                return survey;
-            }
-        }
-        return null;
-    }
-
     public void deleteSurvey() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Enter the ID of the survey you want to delete:");
@@ -159,7 +231,6 @@ public class SurveyCoordinator extends User {
             System.out.println("-------------------------------------");
         }
     }
-
 
     @Override
     public void viewSurveyReports() {
@@ -187,6 +258,4 @@ public class SurveyCoordinator extends User {
         }
 
     }
-
-
 }
