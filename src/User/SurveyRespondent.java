@@ -138,7 +138,7 @@ public class SurveyRespondent extends User {
                 System.out.println(j + 1 + ". " + survey.getQuestions().get(i).getOptions().get(j));
             }
 
-            System.out.println("Enter your answer (0 to skip | -1 to exit) ->");
+            System.out.println("Enter your answer (-1 to exit) ->");
             int answerIndex = scanner.nextInt();
             scanner.nextLine();
 

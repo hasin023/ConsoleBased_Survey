@@ -96,7 +96,6 @@ public class SurveyReportGenerator {
             reportContent.append("--------------------------------------------\n");
 
             Files.write(Paths.get(reportFile), reportContent.toString().getBytes());
-            System.out.println("Report generated successfully for " + reportFile);
 
         } catch (IOException e) {
             System.out.println("Error generating report for " + reportFile);

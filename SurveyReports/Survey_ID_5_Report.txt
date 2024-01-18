@@ -1,9 +1,10 @@
-Distinct Users: 2
-Question-1, Option (Option 1) : 50.00%
-Question-1, Option (Option 3) : 50.00%
+Distinct Users: 3
+Question-1, Option (Option 1) : 66.67%
+Question-1, Option (Option 3) : 33.33%
 Question-2, Option (Option 2) : 100.00%
-Question-3, Option (Option 2) : 50.00%
-Question-3, Option (Option 4) : 50.00%
+Question-3, Option (Option 2) : 33.33%
+Question-3, Option (Option 3) : 33.33%
+Question-3, Option (Option 4) : 33.33%
 Question-4, Option (Option 1) : 50.00%
 Question-4, Option (Option 3) : 50.00%
 Question-5, Option (Option 1) : 50.00%
