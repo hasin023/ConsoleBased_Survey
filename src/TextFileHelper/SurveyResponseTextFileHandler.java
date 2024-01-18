@@ -6,7 +6,9 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class SurveyResponseTextFileHandler {
     private final String responsesDirectory;
@@ -26,11 +28,18 @@ public class SurveyResponseTextFileHandler {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filename, true))) {
             List<String> responses = response.getResponses();
             List<Integer> questionIds = response.getQuestionIds();
+            Map<Integer, String> questionIdToResponseMap = new HashMap<>();
+
+            for (int i = 0; i < questionIds.size(); i++) {
+                int questionId = questionIds.get(i) + 1;
+                String responseText = (i < responses.size()) ? responses.get(i) : "Skipped";
+                questionIdToResponseMap.put(questionId, responseText);
+            }
 
             writer.write("Respondent: " + response.getRespondentUsername());
             writer.newLine();
-            for (int i = 0; i < responses.size(); i++) {
-                writer.write("Question-" + questionIds.get(i) + ": " + responses.get(i));
+            for (int questionId : questionIdToResponseMap.keySet()) {
+                writer.write("Question-" + questionId + ": " + questionIdToResponseMap.get(questionId));
                 writer.newLine();
             }
 
