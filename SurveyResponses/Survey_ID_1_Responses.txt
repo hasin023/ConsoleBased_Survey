@@ -1,0 +1,24 @@
+Respondent: rakinR
+Question-1: 7
+Question-2: 30
+Question-3: 365
+------------------------------
+Respondent: nahiyanR
+Question-1: 8
+Question-2: 22
+Question-3: 300
+------------------------------
+Respondent: diptoR
+Question-1: 6
+Question-2: 29
+Question-3: 300
+------------------------------
+Respondent: adidR
+Question-1: 6
+Question-2: 29
+Question-3: 300
+------------------------------
+Respondent: mahinR
+Question-2: 44
+Question-3: 17
+------------------------------
