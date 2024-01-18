@@ -3,6 +3,9 @@ package Response;
 import java.util.ArrayList;
 import java.util.List;
 
+import Survey.Survey;
+import TextFileHelper.SurveyTextFileHandler;
+
 public class UserResponse {
     private final String respondentUsername;
     private final int surveyId;
@@ -26,20 +29,18 @@ public class UserResponse {
         return responses;
     }
 
-    public int getUserId() {
-        try {
-            return Integer.parseInt(respondentUsername.substring(respondentUsername.length() - 1));
-        } catch (NumberFormatException e) {
-            System.out.println("Error parsing user id from username.");
-            return -1;
-        }
-    }
-
     public List<Integer> getQuestionIds() {
         List<Integer> questionIds = new ArrayList<>();
-        for (int i = 1; i <= responses.size(); i++) {
-            questionIds.add(i);
+        SurveyTextFileHandler surveyTextFileHandler = new SurveyTextFileHandler("Surveys");
+        Survey survey = surveyTextFileHandler.getSurveyById(surveyId);
+
+        if (survey != null) {
+            for (int i = 0; i < responses.size(); i++) {
+                int questionId = survey.getQuestions().get(i).getId();
+                questionIds.add(questionId);
+            }
         }
+
         return questionIds;
     }
 }
