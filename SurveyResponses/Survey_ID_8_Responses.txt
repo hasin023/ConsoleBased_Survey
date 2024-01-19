@@ -28,3 +28,14 @@ Question-2: Beans
 Question-3: Badminton
 Question-4: City
 ------------------------------
+Respondent: faisal
+Question-1: Beans
+Question-2: Football
+Question-3: Beach
+------------------------------
+Respondent: hussain
+Question-1: Red
+Question-2: Peach
+Question-3: Badminton
+Question-4: Sea
+------------------------------

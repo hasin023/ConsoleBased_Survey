@@ -1,13 +1,16 @@
-Distinct Users: 5
-Question-1, Option (Red) : 60.00%
-Question-1, Option (Blue) : 40.00%
-Question-2, Option (Lime) : 20.00%
-Question-2, Option (Beans) : 60.00%
-Question-2, Option (Peach) : 20.00%
-Question-3, Option (Hockey) : 60.00%
-Question-3, Option (Badminton) : 20.00%
-Question-3, Option (Football) : 20.00%
-Question-4, Option (Hills) : 40.00%
-Question-4, Option (City) : 20.00%
-Question-4, Option (Sea) : 40.00%
+Distinct Users: 7
+Question-1, Option (Red) : 57.14%
+Question-1, Option (Beans) : 14.29%
+Question-1, Option (Blue) : 28.57%
+Question-2, Option (Lime) : 14.29%
+Question-2, Option (Beans) : 42.86%
+Question-2, Option (Peach) : 28.57%
+Question-2, Option (Football) : 14.29%
+Question-3, Option (Beach) : 14.29%
+Question-3, Option (Hockey) : 42.86%
+Question-3, Option (Badminton) : 28.57%
+Question-3, Option (Football) : 14.29%
+Question-4, Option (Hills) : 33.33%
+Question-4, Option (City) : 16.67%
+Question-4, Option (Sea) : 50.00%
 --------------------------------------------
