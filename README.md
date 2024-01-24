@@ -61,7 +61,7 @@ For the user panel, the following features are implemented:
 
 ```doc
 # Clone the repository
-# Open the project in IntelliJ
+# Open the project in Visual Studio Code
 # Run the main method in the Main.java file
 # The application will run in the console
 # Follow the instructions in the console to navigate through the application
@@ -69,20 +69,11 @@ For the user panel, the following features are implemented:
 # ENJOY!
 ```
 
-### User Credentials
 
-```doc
-# Coordinator Users
-# Username: admin
-# Password: admin
-
-# Respondent Users
-# Username: user
-# Password: user
-```
 
 ### Contributors
 
-- [Hasin Mahtab](github.com/hasin023)
-- [Mahmudul Islam Mahin](github.com/MI-Mahin)
+- [Hasin Mahtab](github.com/hasin023) <a href="https://l.messenger.com/l.php?u=https%3A%2F%2Fwww.linkedin.com%2Fin%2Fhasin-mahtab-4b9640217%2F&h=AT0_BXRXckXdUsKDv6VfBn5dxXXDQluPGZ96aioD_A6HWgUAHcvXWWmb-iV7C_P9huZx4URbwGRk064bkoExCG6x3BIPVaEsxvPds-_81SXBtBpTdbJMKMrpcJplpgj4p05fIA" target="_blank"><img src="https://content.linkedin.com/content/dam/me/business/en-us/amp/brand-site/v2/bg/LI-Bug.svg.original.svg" alt="LinkedIn" width="20" height="15"></a>
+
+- [Mahmudul Islam Mahin](github.com/MI-Mahin) <a href="www.linkedin.com/in/mahmudul-islam-mahin" target="_blank"><img src="https://content.linkedin.com/content/dam/me/business/en-us/amp/brand-site/v2/bg/LI-Bug.svg.original.svg" alt="LinkedIn" width="20" height="15"></a>
 - [Mohammad Nahiyan kabir](github.com/Nahiyan3)
